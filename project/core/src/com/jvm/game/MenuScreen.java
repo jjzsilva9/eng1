@@ -14,8 +14,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 //Handling of menu screen - processing and rendering
 public class MenuScreen implements Screen {
 
-    private Stage stage;
-    private Table table;
+    private final Stage stage;
 
     final GameController game;
 
@@ -25,7 +24,7 @@ public class MenuScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         //create a table for the UI to be put in
-        table = new Table();
+        Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
         table.setDebug(false);
@@ -44,10 +43,6 @@ public class MenuScreen implements Screen {
         Label.LabelStyle startStyle = new Label.LabelStyle(startFont, Color.WHITE);
         Label start = new Label("Press Enter to Start", startStyle);
         table.add(start);
-    }
-
-    public void create() {
-
     }
 
     public void show() {
