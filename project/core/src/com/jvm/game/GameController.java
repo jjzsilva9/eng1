@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 //Handling for multiple screens
+
+//Freddie testing git
+
 public class GameController extends Game {
 
     public BitmapFont font;
