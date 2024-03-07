@@ -1,0 +1,11 @@
+@startuml
+
+package "Activities" {
+  [StudyPlace]
+  [ActivityPlace]
+  [EatingPlace]
+}
+
+[Map] - Location
+
+@enduml
