@@ -27,7 +27,7 @@ public class MenuScreen implements Screen {
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
-        table.setDebug(false);
+        table.setDebug(true);
 
         //add header to the UI
         BitmapFont headerFont = FontGenerator.GenerateFont(Gdx.files.internal("fonts/KodeMono-VariableFont_wght.ttf"), 50);
