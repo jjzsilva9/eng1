@@ -1,17 +1,62 @@
 package com.jvm.game;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+
 
 //Handling of main game screen - processing and rendering
 public class GameScreen implements Screen {
-    public GameScreen(GameController game) {
-        //Create an ashley engine
-        Engine engine = new Engine();
 
+    public Engine engine;
+    private final SpriteBatch batch;
+
+    public GameScreen(GameController game) {
+
+        batch = new SpriteBatch();
+        OrthographicCamera camera = new OrthographicCamera();
+        camera.setToOrtho(false, game.GAME_WIDTH, game.GAME_HEIGHT);
+
+        //Create an ashley engine
+        engine = new Engine();
+
+        //Create player
+        createPlayer();
+
+        //Create the movement system for the player
+        MovementSystem movementSystem = new MovementSystem();
+        engine.addSystem(movementSystem);
+
+        //Add the render system
+        RenderSystem renderer = new RenderSystem(camera, batch);
+        engine.addSystem(renderer);
+
+    }
+
+    public void createPlayer() {
         //Add the player entity
-        Player player = new Player();
+        Entity player = engine.createEntity();
+
+        //Add texture component
+        Texture playerTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
+        TextureComponent pTextureC = new TextureComponent();
+        pTextureC.texture = playerTexture;
+        player.add(pTextureC);
+
+        //Add position component
+        PositionComponent playerPos = new PositionComponent();
+        player.add(playerPos);
+
+        //Add velocity component
+        VelocityComponent playerVel = new VelocityComponent();
+        playerVel.x = 50f; playerVel.y = 50f;
+        player.add(playerVel);
+
         engine.addEntity(player);
     }
 
@@ -21,8 +66,10 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public void render(float v) {
+    public void render(float deltaTime) {
         ScreenUtils.clear(0, 0, 0, 1);
+        engine.update(deltaTime);
+
     }
 
     @Override
@@ -47,6 +94,6 @@ public class GameScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        batch.dispose();
     }
 }

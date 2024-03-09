@@ -5,17 +5,14 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 //Handling for multiple screens
-
-//Freddie testing git
-
 public class GameController extends Game {
 
-    public BitmapFont font;
-    public SpriteBatch batch;
+
+    public int GAME_WIDTH = 960;
+    public int GAME_HEIGHT = 540;
 
     public void create() {
-        batch = new SpriteBatch();
-        font = new BitmapFont();
+
         this.setScreen(new MenuScreen(this));
     }
 
@@ -24,8 +21,7 @@ public class GameController extends Game {
     }
 
     public void dispose() {
-        batch.dispose();
-        font.dispose();
+
     }
 }
 
