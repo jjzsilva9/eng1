@@ -1,9 +1,12 @@
-package com.jvm.game;
+package com.jvm.game.entities;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.jvm.game.components.PositionComponent;
+import com.jvm.game.components.TextureComponent;
+import com.jvm.game.components.VelocityComponent;
 
 public class Player {
 

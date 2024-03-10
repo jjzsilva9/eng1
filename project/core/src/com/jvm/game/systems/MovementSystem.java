@@ -1,4 +1,4 @@
-package com.jvm.game;
+package com.jvm.game.systems;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
@@ -7,6 +7,8 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.jvm.game.components.PositionComponent;
+import com.jvm.game.components.VelocityComponent;
 
 
 //MovementSystem for player movement

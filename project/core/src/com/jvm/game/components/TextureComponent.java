@@ -1,4 +1,4 @@
-package com.jvm.game;
+package com.jvm.game.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.graphics.Texture;

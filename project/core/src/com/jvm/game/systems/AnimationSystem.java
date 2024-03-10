@@ -1,4 +1,4 @@
-package com.jvm.game;
+package com.jvm.game.systems;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.EntitySystem;

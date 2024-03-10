@@ -1,10 +1,12 @@
-package com.jvm.game;
+package com.jvm.game.systems;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.jvm.game.components.PositionComponent;
+import com.jvm.game.components.TextureComponent;
 
 import java.util.Comparator;
 

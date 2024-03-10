@@ -1,13 +1,13 @@
 package com.jvm.game;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.jvm.game.entities.Player;
+import com.jvm.game.systems.MovementSystem;
+import com.jvm.game.systems.RenderSystem;
 
 
 //Handling of main game screen - processing and rendering
