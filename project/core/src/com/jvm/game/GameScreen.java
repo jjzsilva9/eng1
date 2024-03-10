@@ -26,7 +26,8 @@ public class GameScreen implements Screen {
         engine = new Engine();
 
         //Create player
-        createPlayer();
+        Player p = new Player(engine);
+        engine.addEntity(p.getPlayer());
 
         //Create the movement system for the player
         MovementSystem movementSystem = new MovementSystem();
@@ -36,28 +37,6 @@ public class GameScreen implements Screen {
         RenderSystem renderer = new RenderSystem(camera, batch);
         engine.addSystem(renderer);
 
-    }
-
-    public void createPlayer() {
-        //Add the player entity
-        Entity player = engine.createEntity();
-
-        //Add texture component
-        Texture playerTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
-        TextureComponent pTextureC = new TextureComponent();
-        pTextureC.texture = playerTexture;
-        player.add(pTextureC);
-
-        //Add position component
-        PositionComponent playerPos = new PositionComponent();
-        player.add(playerPos);
-
-        //Add velocity component
-        VelocityComponent playerVel = new VelocityComponent();
-        playerVel.x = 50f; playerVel.y = 50f;
-        player.add(playerVel);
-
-        engine.addEntity(player);
     }
 
     @Override
