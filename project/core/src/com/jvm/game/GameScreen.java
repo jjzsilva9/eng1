@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.jvm.game.entities.Player;
 import com.jvm.game.systems.MovementSystem;
@@ -16,10 +17,12 @@ public class GameScreen implements Screen {
     public Engine engine;
     private final SpriteBatch batch;
 
+    private OrthographicCamera camera;
+
     public GameScreen(GameController game) {
 
         batch = new SpriteBatch();
-        OrthographicCamera camera = new OrthographicCamera();
+        camera = new OrthographicCamera();
         camera.setToOrtho(false, game.GAME_WIDTH, game.GAME_HEIGHT);
 
         //Create an ashley engine

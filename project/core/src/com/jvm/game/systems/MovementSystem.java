@@ -4,10 +4,14 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.jvm.game.GameController;
+import com.jvm.game.GameScreen;
 import com.jvm.game.components.PositionComponent;
+import com.jvm.game.components.TextureComponent;
 import com.jvm.game.components.VelocityComponent;
 
 
@@ -29,15 +33,39 @@ public class MovementSystem  extends EntitySystem {
 
             PositionComponent position = player.getComponent(PositionComponent.class);
             VelocityComponent velocity = player.getComponent(VelocityComponent.class);
+            TextureComponent texture = player.getComponent(TextureComponent.class);
+
+            int playerWidth = texture.texture.getWidth();
+            int playerHeight = texture.texture.getHeight();
 
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
-                position.x -= velocity.x * deltaTime;
+                if (position.x > 0) {
+                    position.x -= velocity.x * deltaTime;
+                }
+                if (position.x < 0) {
+                    position.x = 0;
+                }
             } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
-                position.x += velocity.x * deltaTime;
+                if (position.x + playerWidth < GameController.GAME_WIDTH) {
+                    position.x += velocity.x * deltaTime;
+                }
+                if (position.x + playerWidth > GameController.GAME_WIDTH) {
+                    position.x = GameController.GAME_WIDTH - playerWidth;
+                }
             } else if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
-                position.y += velocity.y * deltaTime;
+                if (position.y + playerHeight < GameController.GAME_HEIGHT) {
+                    position.y += velocity.y * deltaTime;
+                }
+                if (position.y + playerHeight > GameController.GAME_HEIGHT) {
+                    position.y = GameController.GAME_HEIGHT - playerHeight;
+                }
             } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
-                position.y -= velocity.y * deltaTime;
+                if (position.y > 0) {
+                    position.y -= velocity.y * deltaTime;
+                }
+                if (position.y < 0) {
+                    position.y = 0;
+                }
             }
 
         }

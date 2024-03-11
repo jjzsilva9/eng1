@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.jvm.game.components.AnimationComponent;
 import com.jvm.game.components.PositionComponent;
 import com.jvm.game.components.TextureComponent;
 import com.jvm.game.components.VelocityComponent;
@@ -16,10 +17,17 @@ public class Player {
         player = engine.createEntity();
 
         //Add texture component
-        Texture playerTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
+        Texture playerTexture = new Texture(Gdx.files.internal("player/idle-down.png"));
         TextureComponent pTextureC = new TextureComponent();
         pTextureC.texture = playerTexture;
         player.add(pTextureC);
+
+        Texture[][] animMap = {{new Texture(Gdx.files.internal("player/idle-left.png")),
+                                new Texture(Gdx.files.internal("player/idle-right.png")),
+                                new Texture(Gdx.files.internal("player/idle-up.png")),
+                                new Texture(Gdx.files.internal("player/idle-down.png"))}};
+        AnimationComponent playerAnim = new AnimationComponent();
+        playerAnim.animationMap = animMap;
 
         //Add position component
         PositionComponent playerPos = new PositionComponent();
@@ -36,7 +44,7 @@ public class Player {
         player = engine.createEntity();
 
         //Add texture component
-        Texture playerTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
+        Texture playerTexture = new Texture(Gdx.files.internal("idle-down.png"));
         TextureComponent pTextureC = new TextureComponent();
         pTextureC.texture = playerTexture;
         player.add(pTextureC);
