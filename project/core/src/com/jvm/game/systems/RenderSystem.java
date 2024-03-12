@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.jvm.game.components.PositionComponent;
 import com.jvm.game.components.TextureComponent;
+import com.jvm.game.components.TilemapComponent;
 
 import java.util.Comparator;
 
@@ -18,6 +19,7 @@ public class RenderSystem extends EntitySystem {
     //Sorted by z elements of PositionComponents
     private Array<Entity> renderQueue;
     private ImmutableArray<Entity> entities;
+    private Entity mapEntity;
 
     public RenderSystem(OrthographicCamera camera, SpriteBatch batch) {
 
@@ -29,6 +31,8 @@ public class RenderSystem extends EntitySystem {
     public void addedToEngine(Engine engine) {
         //Gets all entities that need rendering
         entities = getEngine().getEntitiesFor(Family.all(PositionComponent.class, TextureComponent.class).get());
+
+        mapEntity = getEngine().getEntitiesFor(Family.all(TilemapComponent.class).get()).get(0);
 
         //Adds them to the rendering queue
         renderQueue = new Array<Entity>();
@@ -49,6 +53,9 @@ public class RenderSystem extends EntitySystem {
 
         camera.update();
         batch.setProjectionMatrix(camera.combined);
+
+        mapEntity.getComponent(TilemapComponent.class).mapRenderer.render();
+        mapEntity.getComponent(TilemapComponent.class).mapRenderer.setView(camera);
 
         //Sorts render queue
         renderQueue.sort(new ZComparator());
