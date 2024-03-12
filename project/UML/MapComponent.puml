@@ -1,0 +1,6 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+[Map] --> [TileMap]
+[RenderSystem]
+@enduml
