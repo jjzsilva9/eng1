@@ -9,4 +9,5 @@ public class AnimationComponent implements Component {
     public int direction = 0;
     public int cycle = 0;
     public Texture[][] animationMap;
+    public boolean isWalking = false;
 }
