@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class GameController extends Game {
 
 
-    public static int GAME_WIDTH = 960;
-    public static int GAME_HEIGHT = 540;
+    public static int GAME_WIDTH = 480;
+    public static int GAME_HEIGHT = 360;
 
     public void create() {
 
