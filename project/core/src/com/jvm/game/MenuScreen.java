@@ -13,7 +13,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 //Handling of menu screen - processing and rendering
 public class MenuScreen implements Screen {
-
     private final Stage stage;
 
     final GameController game;
