@@ -3,26 +3,46 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "Final_Tilemap.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "CS_building.tsx": {
+            "scaleInDock": 0.6,
+            "scaleInEditor": 1
+        },
         "Final_Tilemap.tmx": {
-            "scale": 0.08,
-            "selectedLayer": 0,
+            "scale": 0.661,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 3712.5,
-                "y": 3562.5
+                "x": 133.1316187594553,
+                "y": 218.60816944024208
             }
+        },
+        "Piazza_building.tsx": {
+            "scaleInDock": 0.6,
+            "scaleInEditor": 1
         },
         "Placeholder_Tilemap.tmx": {
             "scale": 0.6894,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 496.08355091383817,
-                "y": 422.1061792863359
+                "x": 494.63301421525966,
+                "y": 420.6556425877574
             }
+        },
+        "constantine_sprite.tsx": {
+            "scaleInDock": 0.6,
+            "scaleInEditor": 1
+        },
+        "constantine_sprite_transparent.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tileset_1.tsx": {
+            "scaleInDock": 0.6,
+            "scaleInEditor": 1
         }
     },
     "last.imagePath": "/Users/freddiehigham/Documents/GitHub/eng1/project/assets/map",
@@ -32,9 +52,17 @@
     "map.tileWidth": 32,
     "map.width": 300,
     "openFiles": [
+        "Final_Tilemap.tmx"
     ],
     "project": "JVM_Tilemap.tiled-project",
     "recentFiles": [
+        "Final_Tilemap.tmx",
+        "Placeholder_Tilemap.tmx",
+        "tileset_1.tsx",
+        "constantine_sprite.tsx",
+        "CS_building.tsx",
+        "Piazza_building.tsx",
+        "constantine_sprite_transparent.tsx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }

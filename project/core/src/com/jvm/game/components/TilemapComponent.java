@@ -11,6 +11,8 @@ public class TilemapComponent implements Component {
     public OrthogonalTiledMapRenderer mapRenderer;
     public TiledMap tilemap;
 
+    public float tileWidth;
+    public float tileHeight;
     public TiledMapTileLayer collisionLayer;
 
 }

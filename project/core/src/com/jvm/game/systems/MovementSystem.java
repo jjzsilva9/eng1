@@ -30,7 +30,6 @@ public class MovementSystem  extends EntitySystem {
     public void update(float deltaTime) {
         for (Entity player: entities) {
 
-
             PositionComponent position = player.getComponent(PositionComponent.class);
             VelocityComponent velocity = player.getComponent(VelocityComponent.class);
             TextureComponent texture = player.getComponent(TextureComponent.class);

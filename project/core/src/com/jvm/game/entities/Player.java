@@ -4,10 +4,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.jvm.game.components.AnimationComponent;
-import com.jvm.game.components.PositionComponent;
-import com.jvm.game.components.TextureComponent;
-import com.jvm.game.components.VelocityComponent;
+import com.jvm.game.components.*;
 
 public class Player {
 
@@ -59,6 +56,9 @@ public class Player {
         VelocityComponent playerVel = new VelocityComponent();
         playerVel.x = 50f; playerVel.y = 50f;
         player.add(playerVel);
+
+        ColliderComponent playerCollider = new ColliderComponent();
+        player.add(playerCollider);
     }
 
     public Entity getPlayer() {

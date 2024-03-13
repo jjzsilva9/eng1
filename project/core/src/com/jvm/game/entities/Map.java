@@ -18,7 +18,10 @@ public class Map {
         tileMapComp.tilemap = new TmxMapLoader().load(file_name);
         tileMapComp.mapRenderer = new OrthogonalTiledMapRenderer(tileMapComp.tilemap);
         tileMapComp.collisionLayer = (TiledMapTileLayer) tileMapComp.tilemap.getLayers().get("Buildings");
-
+        tileMapComp.tileWidth = tileMapComp.collisionLayer.getTileWidth();
+        tileMapComp.tileHeight = tileMapComp.collisionLayer.getTileHeight();
+       // tileMapComp.tileWidth = 32f;
+        ///tileMapComp.tileHeight = 32f;
         map.add(tileMapComp);
     }
 
