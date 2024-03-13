@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.jvm.game.entities.Player;
 import com.jvm.game.entities.Map;
 import com.jvm.game.systems.AnimationSystem;
-import com.jvm.game.systems.MapRenderSystem;
 import com.jvm.game.systems.MovementSystem;
 import com.jvm.game.systems.RenderSystem;
 
