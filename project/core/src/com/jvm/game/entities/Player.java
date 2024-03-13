@@ -35,6 +35,9 @@ public class Player {
         playerVel.x = 50f; playerVel.y = 50f;
         player.add(playerVel);
 
+        ColliderComponent playerCollider = new ColliderComponent();
+        player.add(playerCollider);
+
     }
 
     public Player(Engine engine, int x, int y) {
@@ -56,9 +59,6 @@ public class Player {
         VelocityComponent playerVel = new VelocityComponent();
         playerVel.x = 50f; playerVel.y = 50f;
         player.add(playerVel);
-
-        ColliderComponent playerCollider = new ColliderComponent();
-        player.add(playerCollider);
     }
 
     public Entity getPlayer() {

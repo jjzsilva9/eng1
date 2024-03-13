@@ -10,14 +10,18 @@ import com.badlogic.gdx.Input;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.jvm.game.GameController;
 import com.jvm.game.GameScreen;
+import com.jvm.game.components.ColliderComponent;
 import com.jvm.game.components.PositionComponent;
 import com.jvm.game.components.TextureComponent;
 import com.jvm.game.components.VelocityComponent;
+import com.jvm.game.entities.Player;
 
 
 //MovementSystem for player movement
 public class MovementSystem  extends EntitySystem {
     private ImmutableArray<Entity> entities;
+
+    private CollisionSystem collisionSystem;
 
     public MovementSystem() {}
 
@@ -25,6 +29,8 @@ public class MovementSystem  extends EntitySystem {
         //Finds all entities that need movement handling
         //Should be just player
         entities = engine.getEntitiesFor(Family.all(PositionComponent.class, VelocityComponent.class).get());
+
+        collisionSystem = engine.getSystem(CollisionSystem.class);
     }
 
     public void update(float deltaTime) {
@@ -33,6 +39,9 @@ public class MovementSystem  extends EntitySystem {
             PositionComponent position = player.getComponent(PositionComponent.class);
             VelocityComponent velocity = player.getComponent(VelocityComponent.class);
             TextureComponent texture = player.getComponent(TextureComponent.class);
+
+            float old_x = position.x;
+            float old_y = position.y;
 
             int playerWidth = texture.texture.getWidth();
             int playerHeight = texture.texture.getHeight();
@@ -64,6 +73,13 @@ public class MovementSystem  extends EntitySystem {
                 }
                 if (position.y < 0) {
                     position.y = 0;
+                }
+            }
+
+            if (player.getComponent(ColliderComponent.class) != null) {
+                if (collisionSystem.isColliding(player)) {
+                    position.x = old_x;
+                    position.y = old_y;
                 }
             }
 

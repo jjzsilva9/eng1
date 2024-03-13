@@ -29,19 +29,26 @@ public class CollisionSystem extends EntitySystem {
         tileHeight = map.getComponent(TilemapComponent.class).tileHeight;
     }
 
-    public void update(float deltaTime) {
+    public boolean isColliding(Entity e) {
 
-        for (Entity e: colliderEntities) {
             float object_x = e.getComponent(PositionComponent.class).x;
             float object_y = e.getComponent(PositionComponent.class).y;
-
-            TiledMapTile currentCell = collisionLayer.getCell((int) (object_x / tileWidth),(int) (object_y / tileHeight)).getTile();
-
-            if (currentCell.getProperties().containsKey("Collider")) {
-                System.out.println("Collision");
+            //System.out.println((int) (object_x / tileWidth));
+            //System.out.println((int) (object_y / tileHeight));
+            //System.out.println(collisionLayer.getCell((int) (object_x / tileWidth),(int) (object_y / tileHeight)));
+            if (collisionLayer.getCell((int) (object_x / tileWidth),(int) (object_y / tileHeight)) != null) {
+                TiledMapTile currentCell = collisionLayer.getCell((int) (object_x / tileWidth),(int) (object_y / tileHeight)).getTile();
+                if (currentCell.getProperties().containsKey("Collider")) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
-        }
+            else {
+                return false;
+            }
 
-    }
+        }
 
 }

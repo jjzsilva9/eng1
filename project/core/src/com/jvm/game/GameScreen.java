@@ -38,6 +38,9 @@ public class GameScreen implements Screen {
         Map m = new Map(engine, "map/Final_Tilemap.tmx");
         engine.addEntity(m.getMapEntity());
 
+        CollisionSystem collider = new CollisionSystem();
+        engine.addSystem(collider);
+
         //Create the movement system for the player
         MovementSystem movementSystem = new MovementSystem();
         engine.addSystem(movementSystem);
@@ -46,8 +49,7 @@ public class GameScreen implements Screen {
         RenderSystem renderer = new RenderSystem(camera, batch);
         engine.addSystem(renderer);
 
-        CollisionSystem collider = new CollisionSystem();
-        engine.addSystem(collider);
+
 
 
     }
