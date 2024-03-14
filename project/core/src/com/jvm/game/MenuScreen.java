@@ -13,7 +13,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 //Handling of menu screen - processing and rendering
 public class MenuScreen implements Screen {
-
     private final Stage stage;
 
     final GameController game;
@@ -27,7 +26,6 @@ public class MenuScreen implements Screen {
         Table table = new Table();
         table.setFillParent(true);
         stage.addActor(table);
-        table.setDebug(true);
 
         //add header to the UI
         BitmapFont headerFont = FontGenerator.GenerateFont(Gdx.files.internal("fonts/KodeMono-VariableFont_wght.ttf"), 50);
