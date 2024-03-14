@@ -20,6 +20,7 @@ import com.jvm.game.entities.Player;
 //MovementSystem for player movement
 public class MovementSystem  extends EntitySystem {
     private ImmutableArray<Entity> entities;
+    private AnimationSystem animationSystem;
 
     private CollisionSystem collisionSystem;
 
@@ -31,6 +32,7 @@ public class MovementSystem  extends EntitySystem {
         entities = engine.getEntitiesFor(Family.all(PositionComponent.class, VelocityComponent.class).get());
 
         collisionSystem = engine.getSystem(CollisionSystem.class);
+        animationSystem = engine.getSystem(AnimationSystem.class);
     }
 
     public void update(float deltaTime) {
@@ -53,6 +55,9 @@ public class MovementSystem  extends EntitySystem {
                 if (position.x < 0) {
                     position.x = 0;
                 }
+                animationSystem.setDirection("left");
+                animationSystem.setWalking(true);
+
             } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
                 if (position.x + playerWidth < GameController.GAME_WIDTH) {
                     position.x += velocity.x * deltaTime;
@@ -60,6 +65,9 @@ public class MovementSystem  extends EntitySystem {
                 if (position.x + playerWidth > GameController.GAME_WIDTH) {
                     position.x = GameController.GAME_WIDTH - playerWidth;
                 }
+                animationSystem.setDirection("right");
+                animationSystem.setWalking(true);
+
             } else if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
                 if (position.y + playerHeight < GameController.GAME_HEIGHT) {
                     position.y += velocity.y * deltaTime;
@@ -67,6 +75,9 @@ public class MovementSystem  extends EntitySystem {
                 if (position.y + playerHeight > GameController.GAME_HEIGHT) {
                     position.y = GameController.GAME_HEIGHT - playerHeight;
                 }
+                animationSystem.setDirection("up");
+                animationSystem.setWalking(true);
+
             } else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
                 if (position.y > 0) {
                     position.y -= velocity.y * deltaTime;
@@ -74,6 +85,10 @@ public class MovementSystem  extends EntitySystem {
                 if (position.y < 0) {
                     position.y = 0;
                 }
+                animationSystem.setDirection("down");
+                animationSystem.setWalking(true);
+            } else {
+                animationSystem.setWalking(false);
             }
 
             if (player.getComponent(ColliderComponent.class) != null) {
