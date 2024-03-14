@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+scale 1
+
+Player "1" -left- "1" MovementController
+Map "1" -left- "m" Building
+
+Player "1" -up- "m" Building
+
+Counter "1" -right- "m" Building
+
+Counter "1" -up- "1" Daycount
+
+class Counter {
+    int studyCount
+    int activityCount
+    int eatCount
+    updateDay()
+}
+class Daycount{
+    int day
+}
+
+class Map{
+    int width
+    int height
+}
+
+class Player{
+    int x
+    int y
+    detectCollisions()
+}
+
+class MovementController{
+    int speed
+    updatePlayer()
+
+}
+
+
+abstract Building{
+    int x
+    int y
+    increaseCount()
+}
+@enduml

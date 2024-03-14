@@ -20,9 +20,9 @@ TiledMap map
 }
 
 class PositionComponent {
-float x = 0.0f
-float y = 0.0f
-int z = 1
+float x
+float y
+int z
 }
 
 

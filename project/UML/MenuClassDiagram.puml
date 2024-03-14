@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+MenuScreen - Game
+
+package Game{
+class Counter {
+}
+class Clock {
+}
+class Daycount{
+}
+
+class Map{
+}
+
+abstract Building
+}
+
+class MenuScreen{
+    startGame()
+    exit()
+}
+@enduml

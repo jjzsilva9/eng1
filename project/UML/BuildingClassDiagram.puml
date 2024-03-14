@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Building <|-down- SleepPlace
+Building <|-up- StudyPlace
+Building <|-left- ActivityPlace
+Building <|-right- EatingPlace
+
+abstract Building{
+    int x
+    int y
+    increaseCount()
+}
+
+class SleepPlace{
+    int x
+    int y
+    updateDayCount()
+}
+class StudyPlace{
+    int x
+    int y
+    updateStudyCount()
+}
+class ActivityPlace{
+    int x
+    int y
+    updateActivityCount()
+}
+class EatingPlace{
+    int x
+    int y
+    updateEatCount()
+}
+@enduml

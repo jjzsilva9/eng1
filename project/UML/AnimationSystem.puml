@@ -12,11 +12,12 @@ Texture texture
 }
 
 class AnimationComponent {
- int direction = 0;
- int cycle = 0;
- Texture[][] animationMap;
- boolean isWalking = false;
+ int direction
+ int cycle
+ Texture[][] animationMap
+ boolean isWalking
 }
+
 
 
 
