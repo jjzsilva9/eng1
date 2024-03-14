@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+entity Player
+entity Map
+
+Player *-- PositionComponent
+Player *-- TextureComponent
+
+Map *-- PositionComponent
+Map *-- TilemapComponent
+
+class TextureComponent {
+Texture texture
+}
+
+class TilemapComponent {
+OrthogonalTiledMapRenderer mapRenderer
+TiledMap map
+}
+
+class PositionComponent {
+float x = 0.0f
+float y = 0.0f
+int z = 1
+}
+
+
+@enduml

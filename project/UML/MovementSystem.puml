@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+entity Player
+
+Player *-- PositionComponent
+Player *-- TextureComponent
+Player *-- VelocityComponent
+
+class TextureComponent {
+Texture texture
+}
+
+class VelocityComponent {
+float x = 0.0f
+float y = 0.0f
+}
+
+class PositionComponent {
+float x = 0.0f
+float y = 0.0f
+int z = 1
+}
+
+
+
+@enduml
