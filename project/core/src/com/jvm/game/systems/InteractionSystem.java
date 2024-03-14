@@ -10,8 +10,8 @@ public class InteractionSystem extends EntitySystem {
     public InteractionSystem() {}
 
     public void update(float deltaTime){
-        if (Gdx.input.isKeyPressed(Input.Keys.E) || Gdx.input.isKeyPressed(Input.Keys.ENTER)){
+        if (Gdx.input.isKeyPressed(Input.Keys.E) || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
 
-
+        }
     }
 }

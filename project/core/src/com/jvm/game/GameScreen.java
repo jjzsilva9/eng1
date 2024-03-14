@@ -56,7 +56,6 @@ public class GameScreen implements Screen {
         AnimationSystem animationSystem = new AnimationSystem(p);
         engine.addSystem(animationSystem);
 
-
         //Create the movement system for the player
         MovementSystem movementSystem = new MovementSystem();
         engine.addSystem(movementSystem);
