@@ -30,35 +30,48 @@ public class Player {
         PositionComponent playerPos = new PositionComponent();
         player.add(playerPos);
 
+        playerPos.x = 80f;
+        playerPos.y = 50f;
+
         //Add velocity component
         VelocityComponent playerVel = new VelocityComponent();
-        playerVel.x = 50f; playerVel.y = 50f;
+        playerVel.x = 100f; playerVel.y = 100f;
         player.add(playerVel);
 
         ColliderComponent playerCollider = new ColliderComponent();
         player.add(playerCollider);
-
     }
 
-    public Player(Engine engine, int x, int y) {
+    public Player(Engine engine, float x, float y, float vel_x, float vel_y) {
         player = engine.createEntity();
 
         //Add texture component
-        Texture playerTexture = new Texture(Gdx.files.internal("idle-down.png"));
+        Texture playerTexture = new Texture(Gdx.files.internal("player/idle-down.png"));
         TextureComponent pTextureC = new TextureComponent();
         pTextureC.texture = playerTexture;
         player.add(pTextureC);
 
+        Texture[][] animMap = {{new Texture(Gdx.files.internal("player/idle-left.png")),
+                new Texture(Gdx.files.internal("player/idle-right.png")),
+                new Texture(Gdx.files.internal("player/idle-up.png")),
+                new Texture(Gdx.files.internal("player/idle-down.png"))}};
+        AnimationComponent playerAnim = new AnimationComponent();
+        playerAnim.animationMap = animMap;
+
         //Add position component
         PositionComponent playerPos = new PositionComponent();
+        player.add(playerPos);
+
         playerPos.x = x;
         playerPos.y = y;
-        player.add(playerPos);
 
         //Add velocity component
         VelocityComponent playerVel = new VelocityComponent();
-        playerVel.x = 50f; playerVel.y = 50f;
+        playerVel.x = vel_x; playerVel.y = vel_y;
         player.add(playerVel);
+
+        ColliderComponent playerCollider = new ColliderComponent();
+        player.add(playerCollider);
     }
 
     public Entity getPlayer() {

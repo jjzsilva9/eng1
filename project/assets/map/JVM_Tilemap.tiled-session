@@ -13,11 +13,11 @@
             "scaleInEditor": 1
         },
         "Final_Tilemap.tmx": {
-            "scale": 0.661,
-            "selectedLayer": 1,
+            "scale": 0.7801,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 133.1316187594553,
-                "y": 218.60816944024208
+                "x": 276.8875785155749,
+                "y": 212.15228816818356
             }
         },
         "Piazza_building.tsx": {
@@ -52,17 +52,19 @@
     "map.tileWidth": 32,
     "map.width": 300,
     "openFiles": [
-        "Final_Tilemap.tmx"
+        "Final_Tilemap.tmx",
+        "constantine_sprite_transparent.tsx",
+        "Piazza_building.tsx"
     ],
     "project": "JVM_Tilemap.tiled-project",
     "recentFiles": [
+        "Piazza_building.tsx",
+        "constantine_sprite_transparent.tsx",
         "Final_Tilemap.tmx",
         "Placeholder_Tilemap.tmx",
         "tileset_1.tsx",
         "constantine_sprite.tsx",
-        "CS_building.tsx",
-        "Piazza_building.tsx",
-        "constantine_sprite_transparent.tsx"
+        "CS_building.tsx"
     ],
     "tileset.lastUsedFormat": "tsx"
 }

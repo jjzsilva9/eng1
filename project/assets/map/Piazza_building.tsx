@@ -2,6 +2,7 @@
 <tileset version="1.9" tiledversion="1.9.2" name="Piazza_building" tilewidth="32" tileheight="32" tilecount="12" columns="6">
  <properties>
   <property name="Collider" value="true"/>
+  <property name="Piazza" value=""/>
  </properties>
  <image source="Piazza_building.png" width="198" height="90"/>
  <tile id="0">

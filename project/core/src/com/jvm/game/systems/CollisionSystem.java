@@ -10,7 +10,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.jvm.game.components.ColliderComponent;
 import com.jvm.game.components.PositionComponent;
 import com.jvm.game.components.TilemapComponent;
-import com.jvm.game.components.VelocityComponent;
+
+import java.awt.*;
 
 public class CollisionSystem extends EntitySystem {
 
@@ -21,7 +22,6 @@ public class CollisionSystem extends EntitySystem {
     private TiledMapTileLayer collisionLayer;
 
     public void addedToEngine(Engine engine) {
-
         colliderEntities = engine.getEntitiesFor(Family.all(ColliderComponent.class, PositionComponent.class).get());
         map = engine.getEntitiesFor(Family.all(TilemapComponent.class).get()).get(0);
         collisionLayer = map.getComponent(TilemapComponent.class).collisionLayer;
@@ -29,26 +29,20 @@ public class CollisionSystem extends EntitySystem {
         tileHeight = map.getComponent(TilemapComponent.class).tileHeight;
     }
 
+    //Returns true if the entity is colliding with a tile on the collision layer.
     public boolean isColliding(Entity e) {
 
-            float object_x = e.getComponent(PositionComponent.class).x;
-            float object_y = e.getComponent(PositionComponent.class).y;
-            //System.out.println((int) (object_x / tileWidth));
-            //System.out.println((int) (object_y / tileHeight));
-            //System.out.println(collisionLayer.getCell((int) (object_x / tileWidth),(int) (object_y / tileHeight)));
-            if (collisionLayer.getCell((int) (object_x / tileWidth),(int) (object_y / tileHeight)) != null) {
-                TiledMapTile currentCell = collisionLayer.getCell((int) (object_x / tileWidth),(int) (object_y / tileHeight)).getTile();
-                if (currentCell.getProperties().containsKey("Collider")) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
+            //The x valye
+            float entity_x = e.getComponent(PositionComponent.class).x;
+            float entity_y = e.getComponent(PositionComponent.class).y;
+            if (collisionLayer.getCell((int) (entity_x / tileWidth),(int) (entity_y / tileHeight)) != null) {
+                TiledMapTile currentCell = collisionLayer.getCell((int) (entity_x / tileWidth),(int) (entity_y / tileHeight)).getTile();
+                return true;
             }
             else {
                 return false;
             }
 
-        }
+    }
 
 }

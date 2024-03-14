@@ -31,11 +31,11 @@ public class GameScreen implements Screen {
         engine = new Engine();
 
         //Create player
-        Player p = new Player(engine);
+        Player p = new Player(engine, 50, 100, 100, 100);
         engine.addEntity(p.getPlayer());
 
         //Create tilemap
-        Map m = new Map(engine, "map/Final_Tilemap.tmx");
+        Map m = new Map(engine, "map/Final_Tilemap.tmx", "Buildings");
         engine.addEntity(m.getMapEntity());
 
         CollisionSystem collider = new CollisionSystem();

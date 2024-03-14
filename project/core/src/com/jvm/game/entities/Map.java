@@ -11,17 +11,15 @@ public class Map {
     private Entity map;
     private TilemapComponent tileMapComp;
 
-    public Map(Engine engine, String file_name) {
+    public Map(Engine engine, String fileName, String collisionLayerName) {
         map = engine.createEntity();
 
         tileMapComp = new TilemapComponent();
-        tileMapComp.tilemap = new TmxMapLoader().load(file_name);
+        tileMapComp.tilemap = new TmxMapLoader().load(fileName);
         tileMapComp.mapRenderer = new OrthogonalTiledMapRenderer(tileMapComp.tilemap);
-        tileMapComp.collisionLayer = (TiledMapTileLayer) tileMapComp.tilemap.getLayers().get("Buildings");
+        tileMapComp.collisionLayer = (TiledMapTileLayer) tileMapComp.tilemap.getLayers().get(collisionLayerName);
         tileMapComp.tileWidth = tileMapComp.collisionLayer.getTileWidth();
         tileMapComp.tileHeight = tileMapComp.collisionLayer.getTileHeight();
-       // tileMapComp.tileWidth = 32f;
-        ///tileMapComp.tileHeight = 32f;
         map.add(tileMapComp);
     }
 
