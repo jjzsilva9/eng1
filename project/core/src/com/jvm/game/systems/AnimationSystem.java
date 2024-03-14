@@ -6,18 +6,18 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.jvm.game.components.AnimationComponent;
 import com.jvm.game.components.TextureComponent;
+import com.jvm.game.entities.Player;
 
 //TODO: Needs directional changing and cycling
 public class AnimationSystem extends EntitySystem {
 
-    private Entity player;
+    private Player player;
     private float interval = 0;
     private AnimationComponent playerAnim;
-    private TextureComponent playerText;
-    public AnimationSystem(Entity player) {
+
+    public AnimationSystem(Player player) {
         this.player = player;
-        playerAnim = player.getComponent(AnimationComponent.class);
-        playerText = player.getComponent(TextureComponent.class);
+        playerAnim = player.getAnimationComponent();
     }
 
     public void setDirection(String direction) {
@@ -38,15 +38,25 @@ public class AnimationSystem extends EntitySystem {
         }
     }
 
+    public void setWalking(boolean isWalking) {
+        playerAnim.isWalking = isWalking;
+    }
+
     public void update(float deltaTime) {
-        interval += deltaTime;
-        if (interval > 1) {
+        if (playerAnim.isWalking) {
+            interval += deltaTime;
+        } else {
+            interval = 0;
+            playerAnim.cycle = 0;
+        }
+
+        if (interval > 0.2f) {
             playerAnim.cycle += 1;
             if (playerAnim.cycle == 4) {
                 playerAnim.cycle = 0;
             }
-            interval -= 1;
+            interval -= 0.2f;
         }
-        playerText.texture = playerAnim.animationMap[playerAnim.direction][playerAnim.cycle];
+        player.setTexture(playerAnim.animationMap[playerAnim.cycle][playerAnim.direction]);
     }
 }

@@ -8,8 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.jvm.game.entities.Player;
 import com.jvm.game.entities.Map;
-import com.jvm.game.systems.InteractionSystem;
-import com.jvm.game.systems.MapRenderSystem;
+import com.jvm.game.systems.AnimationSystem;
 import com.jvm.game.systems.MovementSystem;
 import com.jvm.game.systems.RenderSystem;
 
@@ -39,17 +38,12 @@ public class GameScreen implements Screen {
         Map m = new Map(engine, "map/Placeholder_Tilemap.tmx");
         engine.addEntity(m.getMapEntity());
 
+        AnimationSystem animationSystem = new AnimationSystem(p);
+        engine.addSystem(animationSystem);
+
         //Create the movement system for the player
         MovementSystem movementSystem = new MovementSystem();
         engine.addSystem(movementSystem);
-
-        //Create the interaction system for the player
-        InteractionSystem InteractionSystem = new InteractionSystem();
-        engine.addSystem(InteractionSystem);
-
-        //Add map render system
-        MapRenderSystem mapRenderer = new MapRenderSystem(camera);
-        engine.addSystem(mapRenderer);
 
         //Add the render system
         RenderSystem renderer = new RenderSystem(camera, batch);
