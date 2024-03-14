@@ -1,0 +1,7 @@
+@startuml
+
+KeyInput -> InteractionSystem: Player presses interact key
+InteractionSystem -> InteractionSystem: Check player is next to building
+InteractionSystem -> Counter: Increments counter value
+
+@enduml
