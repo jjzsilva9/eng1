@@ -60,7 +60,7 @@ public class Player {
         AnimationComponent playerAnim = new AnimationComponent();
         playerAnim.animationMap = animMap;
         player.add(playerAnim);
-        
+
         //Add position component
         PositionComponent playerPos = new PositionComponent();
         player.add(playerPos);

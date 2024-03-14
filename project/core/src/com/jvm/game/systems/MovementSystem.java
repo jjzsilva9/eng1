@@ -95,6 +95,7 @@ public class MovementSystem  extends EntitySystem {
                 if (collisionSystem.isColliding(player)) {
                     position.x = old_x;
                     position.y = old_y;
+                    animationSystem.setWalking(false);
                 }
             }
 
