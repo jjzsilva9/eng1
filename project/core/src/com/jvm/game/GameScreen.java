@@ -16,10 +16,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jvm.game.entities.Player;
 import com.jvm.game.entities.Map;
-import com.jvm.game.systems.CollisionSystem;
-import com.jvm.game.systems.AnimationSystem;
-import com.jvm.game.systems.MovementSystem;
-import com.jvm.game.systems.RenderSystem;
+import com.jvm.game.systems.*;
 
 
 //Handling of main game screen - processing and rendering
@@ -31,6 +28,8 @@ public class GameScreen implements Screen {
     private final SpriteBatch batch;
 
     private OrthographicCamera camera;
+
+    public Counters counters;
 
     public GameScreen(GameController game) {
 
@@ -49,10 +48,15 @@ public class GameScreen implements Screen {
         Map m = new Map(engine, "map/Final_Tilemap.tmx", "Buildings");
         engine.addEntity(m.getMapEntity());
 
+        stage = new Stage(new ScreenViewport(camera));
+        Counters counters = new Counters(stage);
 
         CollisionSystem collider = new CollisionSystem();
         engine.addSystem(collider);
 
+        InteractionSystem interactionSystem = new InteractionSystem(counters);
+        engine.addSystem(interactionSystem);
+        
         AnimationSystem animationSystem = new AnimationSystem(p);
         engine.addSystem(animationSystem);
 
@@ -63,12 +67,6 @@ public class GameScreen implements Screen {
         //Add the render system
         RenderSystem renderer = new RenderSystem(camera, batch);
         engine.addSystem(renderer);
-
-        stage = new Stage(new ScreenViewport(camera));
-        Counters counters = new Counters(stage);
-
-
-
 
     }
 

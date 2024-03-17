@@ -21,12 +21,15 @@ public class CollisionSystem extends EntitySystem {
     private float tileHeight;
     private TiledMapTileLayer collisionLayer;
 
+    private String[] BUILDINGS;
+
     public void addedToEngine(Engine engine) {
         colliderEntities = engine.getEntitiesFor(Family.all(ColliderComponent.class, PositionComponent.class).get());
         map = engine.getEntitiesFor(Family.all(TilemapComponent.class).get()).get(0);
         collisionLayer = map.getComponent(TilemapComponent.class).collisionLayer;
         tileWidth = map.getComponent(TilemapComponent.class).tileWidth;
         tileHeight = map.getComponent(TilemapComponent.class).tileHeight;
+        BUILDINGS = new String[] {"CS", "Piazza", "Bus", "Constantine"};
     }
 
     //Returns true if the entity is colliding with a tile on the collision layer.
@@ -36,13 +39,38 @@ public class CollisionSystem extends EntitySystem {
             float entity_x = e.getComponent(PositionComponent.class).x;
             float entity_y = e.getComponent(PositionComponent.class).y;
             if (collisionLayer.getCell((int) (entity_x / tileWidth),(int) (entity_y / tileHeight)) != null) {
-                TiledMapTile currentCell = collisionLayer.getCell((int) (entity_x / tileWidth),(int) (entity_y / tileHeight)).getTile();
                 return true;
             }
             else {
                 return false;
             }
 
+    }
+
+    public String buildingColliding(Entity e) {
+        //The x valye
+        float entity_x = e.getComponent(PositionComponent.class).x;
+        float entity_y = e.getComponent(PositionComponent.class).y;
+        if (collisionLayer.getCell((int) (entity_x / tileWidth),(int) (entity_y / tileHeight)) != null) {
+            TiledMapTile currentCell = collisionLayer.getCell((int) (entity_x / tileWidth),(int) (entity_y / tileHeight)).getTile();
+
+            if (currentCell.getProperties().containsKey("CS")) {
+                return "CS";
+            } else if (currentCell.getProperties().containsKey("Piazza")) {
+                return "Piazza";
+            } else if (currentCell.getProperties().containsKey("Constantine")) {
+                return "Constantine";
+            } else if (currentCell.getProperties().containsKey("Bus")) {
+                return "Bus";
+            }
+            else {
+                return "";
+            }
+
+        }
+        else {
+            return "";
+        }
     }
 
 }
