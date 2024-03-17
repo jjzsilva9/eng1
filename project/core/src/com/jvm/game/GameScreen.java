@@ -1,20 +1,30 @@
 package com.jvm.game;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jvm.game.entities.Player;
 import com.jvm.game.entities.Map;
-import com.jvm.game.systems.MapRenderSystem;
+import com.jvm.game.systems.AnimationSystem;
 import com.jvm.game.systems.MovementSystem;
 import com.jvm.game.systems.RenderSystem;
 
 
 //Handling of main game screen - processing and rendering
 public class GameScreen implements Screen {
+
+    private final Stage stage;
 
     public Engine engine;
     private final SpriteBatch batch;
@@ -38,17 +48,19 @@ public class GameScreen implements Screen {
         Map m = new Map(engine, "map/Placeholder_Tilemap.tmx");
         engine.addEntity(m.getMapEntity());
 
+        AnimationSystem animationSystem = new AnimationSystem(p);
+        engine.addSystem(animationSystem);
+
         //Create the movement system for the player
         MovementSystem movementSystem = new MovementSystem();
         engine.addSystem(movementSystem);
 
-        //Add map render system
-        MapRenderSystem mapRenderer = new MapRenderSystem(camera);
-        engine.addSystem(mapRenderer);
-
         //Add the render system
         RenderSystem renderer = new RenderSystem(camera, batch);
         engine.addSystem(renderer);
+
+        stage = new Stage(new ScreenViewport(camera));
+        Counters counters = new Counters(stage);
 
 
 
@@ -63,6 +75,8 @@ public class GameScreen implements Screen {
     public void render(float deltaTime) {
         ScreenUtils.clear(0, 0, 0, 1);
         engine.update(deltaTime);
+        stage.act(deltaTime);
+        stage.draw();
 
     }
 

@@ -22,12 +22,14 @@ public class Player {
         pTextureC.texture = playerTexture;
         player.add(pTextureC);
 
-        Texture[][] animMap = {{new Texture(Gdx.files.internal("player/idle-left.png")),
-                                new Texture(Gdx.files.internal("player/idle-right.png")),
-                                new Texture(Gdx.files.internal("player/idle-up.png")),
-                                new Texture(Gdx.files.internal("player/idle-down.png"))}};
+        //Add animation component
+        Texture[][] animMap = {{new Texture(Gdx.files.internal("player/idle-left.png")), new Texture(Gdx.files.internal("player/idle-right.png")), new Texture(Gdx.files.internal("player/idle-up.png")), new Texture(Gdx.files.internal("player/idle-down.png"))},
+                {new Texture(Gdx.files.internal("player/walk-left-1.png")), new Texture(Gdx.files.internal("player/walk-right-1.png")), new Texture(Gdx.files.internal("player/walk-up-1.png")), new Texture(Gdx.files.internal("player/walk-down-1.png"))},
+                {new Texture(Gdx.files.internal("player/idle-left.png")), new Texture(Gdx.files.internal("player/idle-right.png")), new Texture(Gdx.files.internal("player/idle-up.png")), new Texture(Gdx.files.internal("player/idle-down.png"))},
+                {new Texture(Gdx.files.internal("player/walk-left-3.png")), new Texture(Gdx.files.internal("player/walk-right-3.png")), new Texture(Gdx.files.internal("player/walk-up-3.png")), new Texture(Gdx.files.internal("player/walk-down-3.png"))}};
         AnimationComponent playerAnim = new AnimationComponent();
         playerAnim.animationMap = animMap;
+        player.add(playerAnim);
 
         //Add position component
         PositionComponent playerPos = new PositionComponent();
@@ -91,6 +93,17 @@ public class Player {
         VelocityComponent playerVel = player.getComponent(VelocityComponent.class);
         playerVel.x = x;
         playerVel.y = y;
+    }
+
+    public AnimationComponent getAnimationComponent() {
+        return player.getComponent(AnimationComponent.class);
+    }
+
+    public void setAnimationComponent(AnimationComponent anim) {
+        AnimationComponent animationComponent = player.getComponent(AnimationComponent.class);
+        animationComponent.animationMap = anim.animationMap;
+        animationComponent.cycle = anim.cycle;
+        animationComponent.direction = anim.direction;
     }
 
     public void render() {
