@@ -16,9 +16,9 @@ public class Counters extends Actor {
     private Table statsCounterTable;
 
     private int dayCounter = 1;
-    private static int studyCounter;
-    private int eatCounter;
-    private int activityCounter;
+    private int studyCounter = 0;
+    private int eatCounter = 0;
+    private int activityCounter = 0;
 
     Label.LabelStyle dayStyle;
     Label.LabelStyle statStyle;
