@@ -15,7 +15,7 @@ public class Counters extends Actor {
     private Table dayCounterTable;
     private Table statsCounterTable;
 
-    private int dayCounter;
+    private int dayCounter = 1;
     private static int studyCounter;
     private int eatCounter;
     private int activityCounter;
@@ -37,6 +37,10 @@ public class Counters extends Actor {
         statStyle = new Label.LabelStyle(statFont, Color.WHITE);
         createDayTable();
         createStatsTable();
+    }
+
+    public int getDay() {
+        return dayCounter;
     }
 
     public void createDayTable() {

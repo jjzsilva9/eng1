@@ -8,6 +8,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.jvm.game.Counters;
+import com.jvm.game.GameScreen;
 import com.jvm.game.components.PositionComponent;
 import com.jvm.game.components.VelocityComponent;
 
@@ -17,6 +18,8 @@ public class InteractionSystem extends EntitySystem {
     private ImmutableArray<Entity> entities;
 
     private Counters counters;
+
+    public boolean endGame = false;
 
     public InteractionSystem(Counters c) {
         counters = c;
@@ -34,12 +37,16 @@ public class InteractionSystem extends EntitySystem {
         if (Gdx.input.isKeyJustPressed(Input.Keys.E) ) {
             for (Entity e: entities) {
                 String building = collisionSystem.buildingColliding(e);
-                System.out.println(building);
 
                 if (building == "CS") {counters.increaseStudyCount();}
                 else if (building == "Piazza") {counters.increaseEatCount();}
                 else if (building == "Bus") {counters.increaseActivityCount();}
-                else if (building == "Constantine") {counters.increaseDayCount();}
+                else if (building == "Constantine") {
+                    counters.increaseDayCount();
+                    if (counters.getDay() >= 8) {
+                        endGame = true;
+                    }
+                }
 
             }
         }

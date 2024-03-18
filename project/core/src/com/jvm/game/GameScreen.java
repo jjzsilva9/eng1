@@ -1,6 +1,7 @@
 package com.jvm.game;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -31,8 +32,10 @@ public class GameScreen implements Screen {
 
     public Counters counters;
 
-    public GameScreen(GameController game) {
+    private GameController game;
 
+    public GameScreen(GameController game) {
+        this.game = game;
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, game.GAME_WIDTH, game.GAME_HEIGHT);
@@ -75,8 +78,15 @@ public class GameScreen implements Screen {
 
     }
 
+    public void returnToMenu() {
+        game.setScreen(new MenuScreen(game));
+    }
+
     @Override
     public void render(float deltaTime) {
+        if (engine.getSystem(InteractionSystem.class).endGame) {
+            game.setScreen(new MenuScreen(game));
+        }
         ScreenUtils.clear(0, 0, 0, 1);
         engine.update(deltaTime);
         stage.act(deltaTime);
