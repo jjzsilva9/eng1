@@ -2,7 +2,14 @@ package com.jvm.game.components;
 
 import com.badlogic.ashley.core.Component;
 
-//Stores position and render priority
+/**
+ * PositionComponent
+ *
+ * Holds:
+ *  - An x coordinate
+ *  - A y coordinate
+ *  - A z coordinate (rendering preference)
+ */
 public class PositionComponent  implements Component {
     public float x = 0.0f;
     public float y = 0.0f;

@@ -14,6 +14,10 @@ import com.jvm.game.components.TilemapComponent;
 import java.awt.*;
 import java.util.Iterator;
 
+/**
+ * Mangages collisions between entities with colliders.
+ *
+ */
 public class CollisionSystem extends EntitySystem {
 
     private ImmutableArray<Entity> colliderEntities;
@@ -26,6 +30,12 @@ public class CollisionSystem extends EntitySystem {
 
     private String[] BUILDINGS;
 
+    /**
+     * Initializer when added to engine.
+     *
+     * Finds all entities with a Collider and Position and the map
+     * @param engine The Ashley engine it is added to
+     */
     public void addedToEngine(Engine engine) {
         colliderEntities = engine.getEntitiesFor(Family.all(ColliderComponent.class, PositionComponent.class).get());
         map = engine.getEntitiesFor(Family.all(TilemapComponent.class).get()).get(0);
@@ -35,7 +45,12 @@ public class CollisionSystem extends EntitySystem {
         OFFSET = 35;
     }
 
-    //Returns true if the entity is colliding with a tile on the collision layer.
+
+    /**
+     * Checks collisions between an entity and tiles on the collision layer
+     * @param e The entity we are checking collision for
+     * @return Boolean If the entity is colliding with a tile on the collision layer
+     */
     public boolean isColliding(Entity e) {
 
             //The x valye
@@ -58,6 +73,11 @@ public class CollisionSystem extends EntitySystem {
 
     }
 
+    /**
+     * Checks collisions between an entity and buildings
+     * @param e The entity we are checking collision for
+     * @return Boolean If the entity is colliding with a building on the collision layer
+     */
     public String buildingColliding(Entity e) {
         //The x valye
         float entity_x = e.getComponent(PositionComponent.class).x;
