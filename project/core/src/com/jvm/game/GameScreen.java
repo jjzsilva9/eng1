@@ -1,6 +1,7 @@
 package com.jvm.game;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -16,9 +17,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jvm.game.entities.Player;
 import com.jvm.game.entities.Map;
-import com.jvm.game.systems.AnimationSystem;
-import com.jvm.game.systems.MovementSystem;
-import com.jvm.game.systems.RenderSystem;
+import com.jvm.game.systems.*;
 
 
 //Handling of main game screen - processing and rendering
@@ -31,8 +30,12 @@ public class GameScreen implements Screen {
 
     private OrthographicCamera camera;
 
-    public GameScreen(GameController game) {
+    public Counters counters;
 
+    private GameController game;
+
+    public GameScreen(GameController game) {
+        this.game = game;
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, game.GAME_WIDTH, game.GAME_HEIGHT);
@@ -41,12 +44,21 @@ public class GameScreen implements Screen {
         engine = new Engine();
 
         //Create player
-        Player p = new Player(engine);
+        Player p = new Player(engine, 50, 100, 100, 100);
         engine.addEntity(p.getPlayer());
 
         //Create tilemap
-        Map m = new Map(engine, "map/Placeholder_Tilemap.tmx");
+        Map m = new Map(engine, "map/Final_Tilemap.tmx", "Buildings");
         engine.addEntity(m.getMapEntity());
+
+        stage = new Stage(new ScreenViewport(camera));
+        Counters counters = new Counters(stage);
+
+        CollisionSystem collider = new CollisionSystem();
+        engine.addSystem(collider);
+
+        InteractionSystem interactionSystem = new InteractionSystem(counters);
+        engine.addSystem(interactionSystem);
 
         AnimationSystem animationSystem = new AnimationSystem(p);
         engine.addSystem(animationSystem);
@@ -59,11 +71,6 @@ public class GameScreen implements Screen {
         RenderSystem renderer = new RenderSystem(camera, batch);
         engine.addSystem(renderer);
 
-        stage = new Stage(new ScreenViewport(camera));
-        Counters counters = new Counters(stage);
-
-
-
     }
 
     @Override
@@ -71,8 +78,15 @@ public class GameScreen implements Screen {
 
     }
 
+    public void returnToMenu() {
+        game.setScreen(new MenuScreen(game));
+    }
+
     @Override
     public void render(float deltaTime) {
+        if (engine.getSystem(InteractionSystem.class).endGame) {
+            game.setScreen(new MenuScreen(game));
+        }
         ScreenUtils.clear(0, 0, 0, 1);
         engine.update(deltaTime);
         stage.act(deltaTime);

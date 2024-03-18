@@ -4,10 +4,7 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.jvm.game.components.AnimationComponent;
-import com.jvm.game.components.PositionComponent;
-import com.jvm.game.components.TextureComponent;
-import com.jvm.game.components.VelocityComponent;
+import com.jvm.game.components.*;
 
 public class Player {
 
@@ -35,32 +32,53 @@ public class Player {
         PositionComponent playerPos = new PositionComponent();
         player.add(playerPos);
 
+        playerPos.x = 80f;
+        playerPos.y = 50f;
+
         //Add velocity component
         VelocityComponent playerVel = new VelocityComponent();
-        playerVel.x = 50f; playerVel.y = 50f;
+        playerVel.x = 100f; playerVel.y = 100f;
         player.add(playerVel);
 
+        ColliderComponent playerCollider = new ColliderComponent();
+        playerCollider.width = playerTexture.getWidth();
+        playerCollider.height = playerTexture.getHeight();
+        player.add(playerCollider);
     }
 
-    public Player(Engine engine, int x, int y) {
+    public Player(Engine engine, float x, float y, float vel_x, float vel_y) {
         player = engine.createEntity();
 
         //Add texture component
-        Texture playerTexture = new Texture(Gdx.files.internal("idle-down.png"));
+        Texture playerTexture = new Texture(Gdx.files.internal("player/idle-down.png"));
         TextureComponent pTextureC = new TextureComponent();
         pTextureC.texture = playerTexture;
         player.add(pTextureC);
 
+        Texture[][] animMap = {{new Texture(Gdx.files.internal("player/idle-left.png")), new Texture(Gdx.files.internal("player/idle-right.png")), new Texture(Gdx.files.internal("player/idle-up.png")), new Texture(Gdx.files.internal("player/idle-down.png"))},
+                {new Texture(Gdx.files.internal("player/walk-left-1.png")), new Texture(Gdx.files.internal("player/walk-right-1.png")), new Texture(Gdx.files.internal("player/walk-up-1.png")), new Texture(Gdx.files.internal("player/walk-down-1.png"))},
+                {new Texture(Gdx.files.internal("player/idle-left.png")), new Texture(Gdx.files.internal("player/idle-right.png")), new Texture(Gdx.files.internal("player/idle-up.png")), new Texture(Gdx.files.internal("player/idle-down.png"))},
+                {new Texture(Gdx.files.internal("player/walk-left-3.png")), new Texture(Gdx.files.internal("player/walk-right-3.png")), new Texture(Gdx.files.internal("player/walk-up-3.png")), new Texture(Gdx.files.internal("player/walk-down-3.png"))}};
+        AnimationComponent playerAnim = new AnimationComponent();
+        playerAnim.animationMap = animMap;
+        player.add(playerAnim);
+
         //Add position component
         PositionComponent playerPos = new PositionComponent();
+        player.add(playerPos);
+
         playerPos.x = x;
         playerPos.y = y;
-        player.add(playerPos);
 
         //Add velocity component
         VelocityComponent playerVel = new VelocityComponent();
-        playerVel.x = 50f; playerVel.y = 50f;
+        playerVel.x = vel_x; playerVel.y = vel_y;
         player.add(playerVel);
+
+        ColliderComponent playerCollider = new ColliderComponent();
+        playerCollider.width = playerTexture.getWidth();
+        playerCollider.height = playerTexture.getHeight();
+        player.add(playerCollider);
     }
 
     public Entity getPlayer() {
