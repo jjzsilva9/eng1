@@ -11,7 +11,7 @@ public class GameController extends Game {
 
 
     public static int GAME_WIDTH = 960 ;
-    public static int GAME_HEIGHT = 540;
+    public static int GAME_HEIGHT = 600;
 
     /**
      * Start, sets the menu screen
