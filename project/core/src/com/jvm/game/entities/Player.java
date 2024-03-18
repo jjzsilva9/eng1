@@ -41,6 +41,8 @@ public class Player {
         player.add(playerVel);
 
         ColliderComponent playerCollider = new ColliderComponent();
+        playerCollider.width = playerTexture.getWidth();
+        playerCollider.height = playerTexture.getHeight();
         player.add(playerCollider);
     }
 
@@ -74,6 +76,8 @@ public class Player {
         player.add(playerVel);
 
         ColliderComponent playerCollider = new ColliderComponent();
+        playerCollider.width = playerTexture.getWidth();
+        playerCollider.height = playerTexture.getHeight();
         player.add(playerCollider);
     }
 

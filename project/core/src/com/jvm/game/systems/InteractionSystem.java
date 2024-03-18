@@ -30,20 +30,16 @@ public class InteractionSystem extends EntitySystem {
     }
 
     public void update(float deltaTime){
-
-        if (Gdx.input.isKeyPressed(Input.Keys.E) || Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+    //|| Gdx.input.isKeyPressed(Input.Keys.ENTER)
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E) ) {
             for (Entity e: entities) {
                 String building = collisionSystem.buildingColliding(e);
-                switch (building){
-                    case "CS":
-                        counters.increaseStudyCount();
-                    case "Piazza":
-                        counters.increaseEatCount();
-                    case "Bus":
-                        counters.increaseActivityCount();
-                    case "Constantine":
-                        counters.increaseDayCount();
-                }
+                System.out.println(building);
+
+                if (building == "CS") {counters.increaseStudyCount();}
+                else if (building == "Piazza") {counters.increaseEatCount();}
+                else if (building == "Bus") {counters.increaseActivityCount();}
+                else if (building == "Constantine") {counters.increaseDayCount();}
 
             }
         }

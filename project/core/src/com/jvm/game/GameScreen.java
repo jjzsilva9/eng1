@@ -56,7 +56,7 @@ public class GameScreen implements Screen {
 
         InteractionSystem interactionSystem = new InteractionSystem(counters);
         engine.addSystem(interactionSystem);
-        
+
         AnimationSystem animationSystem = new AnimationSystem(p);
         engine.addSystem(animationSystem);
 
