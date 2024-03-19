@@ -1,27 +1,31 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+entity Player
+entity Map
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
+Player *-- PositionComponent
+Map *-- TilemapComponent
+Player *-- ColliderComponent
 
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+class TilemapComponent {
+OrthogonalTiledMapRenderer mapRenderer
+TiledMap tilemap
+float tileWidth
+float tileHeight
+TiledMapTileLayer collisionLayer
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+class ColliderComponent {
+float width
+float height
 }
+
+class PositionComponent {
+float x
+float y
+int z
+}
+
 
 @enduml

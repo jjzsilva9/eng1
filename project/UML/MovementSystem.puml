@@ -6,6 +6,7 @@ entity Player
 Player *-- PositionComponent
 Player *-- TextureComponent
 Player *-- VelocityComponent
+Player *-- ColliderComponent
 
 class TextureComponent {
 Texture texture
@@ -20,6 +21,11 @@ class PositionComponent {
 float x
 float y
 int z
+}
+
+class ColliderComponent {
+float width
+float height
 }
 
 
