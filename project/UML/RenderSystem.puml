@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class PositionComponent {
+    float x
+    float y
+    float z // render prioritisation
+}
+
+class TextureComponent {
+    Texture texture
+}
+
+class TilemapComponent{
+OrthogonalTiledMapRenderer mapRenderer
+TiledMap tilemap
+float tileWidth
+float tileHeight
+TiledMapTileLayer collisionLayer
+}
+
+Player *-- PositionComponent
+Player *-- TextureComponent
+Map *-- PositionComponent
+Map *-- TilemapComponent
+@enduml

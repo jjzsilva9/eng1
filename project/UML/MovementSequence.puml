@@ -1,10 +1,11 @@
 @startuml
-'https://plantuml.com/sequence-diagram
 
-autonumber
-
-MovementSystem -> AnimationSystem: Update player sprite for movement
-MovementSystem -> RenderSystem: Update player position
-AnimationSystem -> RenderSystem: Draw new player sprite
+KeyInput -> MovementSystem: Player presses key
+MovementSystem -> AnimationSystem: Sets player to walking in correct direction
+AnimationSystem -> AnimationSystem: Updates sprite
+MovementSystem -> MovementSystem: Player position updated
+MovementSystem -> CollisionSystem: Checks for collision
+CollisionSystem -> MovementSystem: Collision check response
+MovementSystem -> MovementSystem: Moves player back if collision occurs
 
 @enduml

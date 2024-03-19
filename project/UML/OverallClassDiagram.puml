@@ -1,0 +1,217 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Component <|-- AnimationComponent
+Component <|-- PositionComponent
+Component <|-- TextureComponent
+Component <|-- TilemapComponent
+Component <|-- VelocityComponent
+
+abstract class Component{
+}
+
+class AnimationComponent{
++int direction
++int cycle
++Texture[][] animationMap
++boolean isWalking
+}
+
+class ColliderComponent{
++float width
++float height
+}
+
+class PositionComponent{
++float x
++float y
++int z
+}
+
+class TextureComponent{
++Texture texture
+}
+
+class TilemapComponent{
++OrthogonalTiledMapRenderer mapRenderer
++TiledMap tileMap
++float tileWidth
++float tileHeight
++TiledMapTileLayer collisionLayer
+}
+
+class VelocityComponent{
++float x
++float y
+}
+
+class Map{
+-Entity map
+-TilemapComponent tileMapComp
++Map()
++Entity getMapEntity()
+}
+
+class Player{
+-Entity player
++Player()
++Entity getPlayer()
++Texture getTexture()
++void setTexture()
++PositionComponent getPosition()
++void setPosition()
++VelocityComponent getVelocity()
++void setVelocity()
++AnimationComponent getAnimationComponent()
++void setAnimationComponent()
+}
+
+EntitySystem <|-- AnimationSystem
+EntitySystem <|-- MovementSystem
+EntitySystem <|-- CollisionSystem
+EntitySystem <|-- RenderSystem
+EntitySystem <|-- InteractionSystem
+
+abstract class EntitySystem{
+}
+
+class AnimationSystem{
+-Player player
+-float interval
+-AnimationComponent playerAnim
++AnimationSystem()
++void setDirection()
++void setWalking()
++void update()
+}
+
+class CollisionSystem{
+-ImmutableArray<Entity> colliderEntities
+-Entity map
+-float tileWidth
+-float tileHeight
+-TiledMapTileLayer collisionLayer
+-int OFFSET
+-String[] BUILDINGS
++void addedToEngine()
++boolean isColliding()
++String buildingColliding()
+}
+
+class InteractionSystem{
+-CollisionSystem collisionSystem
+-ImmutableArray<Entity> entities
+-Counters counters
++boolean endGame
++InteractionSystem()
++void addedToEngine()
++void update()
+}
+
+class MovementSystem{
+-ImmutableArray<Entity> entities
+-AnimationSystem animationSystem
+-CollisionSystem collisionSystem
++MovementSystem()
++void addedToEngine()
++void update()
+}
+
+class RenderSystem{
+-SpriteBatch batch
+-OrthographicCamera camera
+-Array<Entity> renderQueue
+-ImmutableArray<Entity> entities
+-Entity mapEntity
++RenderSystem()
++void addedToEngine()
++void entityAdded()
++void update()
++void removedFromEngine()
+}
+
+"Comparator<Entity>" <|-- ZComparator
+abstract class "Comparator<Entity>"{
+}
+
+class ZComparator{
+-ComponentMapper<PositionComponent> pm
++int compare()
+}
+
+Actor <|-- Counters
+class Counters{
+-Stage stage
+-Table dayCounterTable
+-Table statsCounterTable
+-int dayCounter
+-int studyCounter
+-int eatCounter
+-int activityCounter
+Label.LabelStyle dayStyle
+Label.LabelStyle statStyle
+Label dayLabel
+Label studyLabel
+Label eatLabel
+Label relaxLabel
++Counters()
++int getDay()
++void createDayTable()
++void createStatsTable()
++void addDayTracker()
++void addEatCounter()
++void addStudyCounter()
++void addActivityCounter()
++void increaseDayCount()
++void increaseEatCount()
++void increaseActivityCount()
++void increaseStudyCount()
+}
+
+class FontGenerator{
++BitmapFont GenerateFont()
+}
+
+Game <|-- GameController
+
+class GameController{
++int GAME_WIDTH
++int GAME_HEIGHT
++void create()
++void render()
++void dispose()
+}
+
+Screen <|-- GameScreen
+Screen <|-- MenuScreen
+
+class GameScreen{
+-Stage stage
++Engine engine
+-SpriteBatch batch
+-OrthographicCamera camera
++Counters counters
+-GameController game
++GameScreen()
++void show()
++void render()
++void resize()
++void pause()
++void resume()
++void hide()
++void dispose()
+}
+
+class MenuScreen{
+-Stage stage
+GameController game
++MenuScreen()
++void show()
++void resize()
++void pause()
++void resume()
++void hide()
++void render()
++void dispose()
+}
+@enduml

@@ -1,0 +1,9 @@
+@startuml
+
+KeyInput -> InteractionSystem: Player presses interact key
+InteractionSystem -> CollisionSystem: Check player is next to building
+CollisionSystem -> InteractionSystem: Returns whether colliding
+InteractionSystem -> Counter: Increments counter value
+Counter -> Scene2D: Updates UI label value
+
+@enduml
