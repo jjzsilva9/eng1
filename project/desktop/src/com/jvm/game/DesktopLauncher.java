@@ -9,6 +9,8 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("JVM Game");
+		config.setWindowedMode(960, 600);
+		config.setResizable(false);
 		new Lwjgl3Application(new GameController(), config);
 	}
 }
