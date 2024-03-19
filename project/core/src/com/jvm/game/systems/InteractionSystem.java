@@ -53,19 +53,24 @@ public class InteractionSystem extends EntitySystem {
      * @param deltaTime Time since the last frame
      */
     public void update(float deltaTime){
-        //If E pressed
+        //If the key "e" is pressed
         if (Gdx.input.isKeyJustPressed(Input.Keys.E) ) {
             //For each entity with position and velocity (Player)
             for (Entity e: entities) {
-                //Check if colliding with a building
+                //Finds the name of the building it is colliding with (empty string if not colliding)
                 String building = collisionSystem.buildingColliding(e);
 
-                //Call the correct counter function
-                if (building == "CS") {counters.increaseStudyCount();}
-                else if (building == "Piazza") {counters.increaseEatCount();}
-                else if (building == "Bus") {counters.increaseActivityCount();}
+                //Call the correct counter function depending on the building
+                if (building == "CS") {
+                    counters.increaseStudyCount();}
+                else if (building == "Piazza") {
+                    counters.increaseEatCount();
+                }
+                else if (building == "Bus") {
+                    counters.increaseActivityCount();
+                }
                 else if (building == "Constantine") {
-                    //End the game if days goes above 7
+                    //End the game if days counter goes above 7
                     counters.increaseDayCount();
                     if (counters.getDay() >= 8) {
                         endGame = true;
