@@ -8,18 +8,30 @@ import com.jvm.game.components.AnimationComponent;
 import com.jvm.game.components.TextureComponent;
 import com.jvm.game.entities.Player;
 
-//TODO: Needs directional changing and cycling
+/**
+ * Manages the Player's texture based on movement
+ *
+ * Provides functions for setting direction and walking.
+ */
 public class AnimationSystem extends EntitySystem {
 
     private Player player;
     private float interval = 0;
     private AnimationComponent playerAnim;
 
+    /**
+     * Initializer
+     * @param player The player entity the animation system should apply to
+     */
     public AnimationSystem(Player player) {
         this.player = player;
         playerAnim = player.getAnimationComponent();
     }
 
+    /**
+     * Sets the player's texture to a specific direction
+     * @param direction The direction to be set to
+     */
     public void setDirection(String direction) {
         switch (direction) {
             case "left":
@@ -38,10 +50,19 @@ public class AnimationSystem extends EntitySystem {
         }
     }
 
+    /**
+     * Sets the player to cycle animation or not
+     * @param isWalking Is the player walking
+     */
     public void setWalking(boolean isWalking) {
         playerAnim.isWalking = isWalking;
     }
 
+    /**
+     * Update method for the animation system
+     * Calculates new textures
+     * @param deltaTime Time since last frame
+     */
     public void update(float deltaTime) {
         //Update interval since last changed walk cycle if walking
         if (playerAnim.isWalking) {
