@@ -8,7 +8,6 @@ import com.badlogic.ashley.core.Component;
  * Holds:
  *  - Width of collider
  *  - Height of collider
- *  - Flag indicating if colliding
  */
 public class ColliderComponent implements Component {
     //The collision box.
