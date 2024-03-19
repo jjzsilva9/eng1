@@ -17,24 +17,42 @@ import com.jvm.game.components.VelocityComponent;
 import com.jvm.game.entities.Player;
 
 
-//MovementSystem for player movement
+/**
+ * Manages movement for the Player entity
+ *
+ * Reads in movement and updates the animation system
+ */
 public class MovementSystem  extends EntitySystem {
     private ImmutableArray<Entity> entities;
     private AnimationSystem animationSystem;
 
     private CollisionSystem collisionSystem;
 
+    /**
+     * Initializer
+     */
     public MovementSystem() {}
 
+    /**
+     * Gets all entities with a position, velocity component (player)
+     * Also gets references to the collision and animation system
+     * @param engine The Ashley engine it is added to
+     */
     public void addedToEngine(Engine engine) {
         //Finds all entities that need movement handling
-        //Should be just player
         entities = engine.getEntitiesFor(Family.all(PositionComponent.class, VelocityComponent.class).get());
 
         collisionSystem = engine.getSystem(CollisionSystem.class);
         animationSystem = engine.getSystem(AnimationSystem.class);
     }
 
+    /**
+     * Update method
+     *
+     * Update position based on velocity and collision resolution
+     * Updates the animation system
+     * @param deltaTime Time since the last frame
+     */
     public void update(float deltaTime) {
         for (Entity player: entities) {
 
@@ -48,6 +66,8 @@ public class MovementSystem  extends EntitySystem {
             int playerWidth = texture.texture.getWidth();
             int playerHeight = texture.texture.getHeight();
 
+            //Move in pressed direction if in game window
+            //Update animation system for this move
             if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
                 if (position.x > 0) {
                     position.x -= velocity.x * deltaTime;
@@ -88,9 +108,11 @@ public class MovementSystem  extends EntitySystem {
                 animationSystem.setDirection("down");
                 animationSystem.setWalking(true);
             } else {
+                //If not walking, update animation system
                 animationSystem.setWalking(false);
             }
 
+            //If the player is colliding, revert changes and update animation system
             if (player.getComponent(ColliderComponent.class) != null) {
                 if (collisionSystem.isColliding(player)) {
                     position.x = old_x;

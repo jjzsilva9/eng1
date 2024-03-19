@@ -11,12 +11,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-//Handling of menu screen - processing and rendering
+/**
+ * Menu Screen
+ * Renders main menu
+ */
 public class MenuScreen implements Screen {
     private final Stage stage;
 
     final GameController game;
 
+    /**
+     * Creates a Scene2D stage for main title and adds text
+     * @param game Game instance
+     */
     public MenuScreen(final GameController game) {
         this.game = game;
         stage = new Stage(new ScreenViewport());
@@ -57,6 +64,12 @@ public class MenuScreen implements Screen {
 
     public void hide() {}
 
+    /**
+     * Render function for main menu
+     * Updates Scene2D stage
+     * Checks for Enter, changes to Game screen
+     * @param delta
+     */
     @Override
     public void render(float delta) {
         //Sets background to a dark blue

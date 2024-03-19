@@ -20,7 +20,11 @@ import com.jvm.game.entities.Map;
 import com.jvm.game.systems.*;
 
 
-//Handling of main game screen - processing and rendering
+/**
+ * Game Screen
+ * Acts as a handler for all game logic and rendering
+ * Creates an Ashley Engine and a Scene2D stage for UI
+ */
 public class GameScreen implements Screen {
 
     private final Stage stage;
@@ -34,6 +38,18 @@ public class GameScreen implements Screen {
 
     private GameController game;
 
+    /**
+     * Creates Ashley engine and adds:
+     *   - Player entity
+     *   - Map entity
+     *   - CollisionSystem
+     *   - InteractionSystem
+     *   - AnimationSystem
+     *   - MovementSystem
+     *   - RenderSystem
+     * Creates Scene2D stage for UI
+     * @param game The Game instance
+     */
     public GameScreen(GameController game) {
         this.game = game;
         batch = new SpriteBatch();
@@ -51,15 +67,19 @@ public class GameScreen implements Screen {
         Map m = new Map(engine, "map/Final_Tilemap.tmx", "Buildings");
         engine.addEntity(m.getMapEntity());
 
+        //Create Scene2D stage and add counters
         stage = new Stage(new ScreenViewport(camera));
         Counters counters = new Counters(stage);
 
+        //Create collision system and add
         CollisionSystem collider = new CollisionSystem();
         engine.addSystem(collider);
 
+        //Create interaction system and add
         InteractionSystem interactionSystem = new InteractionSystem(counters);
         engine.addSystem(interactionSystem);
 
+        //Create animation system and add
         AnimationSystem animationSystem = new AnimationSystem(p);
         engine.addSystem(animationSystem);
 
@@ -78,10 +98,13 @@ public class GameScreen implements Screen {
 
     }
 
-    public void returnToMenu() {
-        game.setScreen(new MenuScreen(game));
-    }
-
+    /**
+     * Render function for game screen
+     *
+     * Updates Ashley engine and Scene2D stage
+     * If game is over, returns to Menu
+     * @param deltaTime Time since last frame
+     */
     @Override
     public void render(float deltaTime) {
         if (engine.getSystem(InteractionSystem.class).endGame) {
@@ -95,7 +118,7 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public void resize(int i, int i1) {
+    public void resize(int width, int height) {
 
     }
 

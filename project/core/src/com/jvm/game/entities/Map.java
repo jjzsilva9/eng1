@@ -7,10 +7,21 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.jvm.game.components.TilemapComponent;
 
+/**
+ * A wrapper class for creating and managing a Map entity.
+ * Has components:
+ *   - TilemapComponent
+ */
 public class Map {
     private Entity map;
     private TilemapComponent tileMapComp;
 
+    /**
+     * Creates the entity with a TilemapComponent
+     * @param engine Ashley engine to add the Map to
+     * @param fileName Filename of the tilemap
+     * @param collisionLayerName Name of the collision layer
+     */
     public Map(Engine engine, String fileName, String collisionLayerName) {
         map = engine.createEntity();
 
@@ -23,6 +34,10 @@ public class Map {
         map.add(tileMapComp);
     }
 
+    /**
+     * Getter for the map entity
+     * @return The Map entity
+     */
     public Entity getMapEntity() {
         return map;
     }

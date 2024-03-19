@@ -43,6 +43,7 @@ public class AnimationSystem extends EntitySystem {
     }
 
     public void update(float deltaTime) {
+        //Update interval since last changed walk cycle if walking
         if (playerAnim.isWalking) {
             interval += deltaTime;
         } else {
@@ -50,6 +51,7 @@ public class AnimationSystem extends EntitySystem {
             playerAnim.cycle = 0;
         }
 
+        //If animation cycle needs changing, update and reset interval
         if (interval > 0.2f) {
             playerAnim.cycle += 1;
             if (playerAnim.cycle == 4) {
@@ -57,6 +59,8 @@ public class AnimationSystem extends EntitySystem {
             }
             interval -= 0.2f;
         }
+
+        //Set the player texture to the correct texture for the animation
         player.setTexture(playerAnim.animationMap[playerAnim.cycle][playerAnim.direction]);
     }
 }
