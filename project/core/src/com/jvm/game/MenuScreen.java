@@ -47,6 +47,12 @@ public class MenuScreen implements Screen {
         BitmapFont startFont = FontGenerator.GenerateFont(Gdx.files.internal("fonts/KodeMono-VariableFont_wght.ttf"), 25);
         Label.LabelStyle startStyle = new Label.LabelStyle(startFont, Color.WHITE);
         Label start = new Label("Press Enter to Start", startStyle);
+        Label instructions = new Label("Use WASD to Move, E to Interact", startStyle);
+        Label lineBreak = new Label("", startStyle);
+        table.add(instructions);
+        table.row();
+        table.add(lineBreak);
+        table.row();
         table.add(start);
     }
 
